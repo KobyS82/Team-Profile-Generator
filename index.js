@@ -106,7 +106,7 @@ function init() {
     inquirer.prompt(questions).then(answers => {
       // generate team
       if (answers.role === 'None') {
-        console.log(answersArr);
+        console.log(teamArray);
         generateTeam();
         return;
       }
@@ -114,7 +114,7 @@ function init() {
       if (answers.role === 'Manager') {
         inquirer.prompt(manager).then(answers => {
           const manager = new Manager(answers.name, answers.id, answers.email, answers.office);
-          answersArr.push(manager);
+          teamArray.push(manager);
           init();
         })
       }
@@ -122,7 +122,7 @@ function init() {
       if (answers.role === 'Engineer') {
         inquirer.prompt(engineer).then(answers => {
           const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-          answersArr.push(engineer);
+          teamArray.push(engineer);
           init();
         })
       }
@@ -130,7 +130,7 @@ function init() {
       if (answers.role === 'Intern') {
         inquirer.prompt(intern).then(answers => {
           const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
-          answersArr.push(intern);
+          teamArray.push(intern);
           init();
         })
       }
@@ -143,6 +143,6 @@ function init() {
   
   // generates team
   function generateTeam() {
-    fs.writeFileSync('./dist/generatedTeam.html', generateHTML(answersArr), "utf-8");
+    fs.writeFileSync('./dist/generatedTeam.html', generateHTML(teamArray), "utf-8");
     console.log('Finished generating team.')
   };
